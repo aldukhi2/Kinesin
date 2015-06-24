@@ -1,0 +1,9 @@
+NOTE1: Code tested with python 2.7.3. Your version: 2.7.8 |Anaconda 2.0.1 (64-bit)| (default, Aug 21 2014, 18:22:21) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)]
+
+NOTE2: Please be sure to use the same version of CGenFF in your simulations that was used during parameter generation:
+--Version of CGenFF detected in  stlc.str : 2b8
+--Version of CGenFF detected in  /usr/local/GROMACS/4.6.5/share/gromacs/top/charmm36_mod_pt2.ff/forcefield.doc : 2b8
+
+NOTE3: In order to avoid duplicated parameters, do NOT select the 'Include parameters that are already in CGenFF' option when uploading a molecule into CGenFF.
+

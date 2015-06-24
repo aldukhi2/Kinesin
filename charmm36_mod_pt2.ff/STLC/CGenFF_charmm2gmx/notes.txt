@@ -1,0 +1,34 @@
+# Import the output file from CGenFF + the modified charges proposed by Vitaly
+cp ../../Vitaly/zinc_3861261.str .
+
+cp zinc_3861261.str stlc.str # stlc.str: I modified the name of the residue + arrange
+                             # the charges
+cp ../../CGenFF_parameters/CGenFF_charmm2gmx_test/zinc_3861261.mol2 .   # the mol2 fie submitted to CGenFF. this
+                                                                        # file comes from the database ZINC
+
+# source activate myenv (for anaconda)
+python cgenff_charmm2gmx.py ZZD zinc_3861261.mol2 stlc.str /usr/local/GROMACS/4.6.5/share/gromacs/top/charmm36_mod_pt2.ff > output_cgenffpy.txt 
+
+# In zzd.itp, I replace ZINC0*** with ZZD
+
+#
+# FROM THESE PARAMETERS TO THE PARAMETERS INTO THE FF
+# The notation of the type of atoms the notation given by the str file (it
+# does not correspond to the classical name in Gromacs or in the PDB)
+#
+
+
+#
+# I try to convert the itp file into the an rtp file (I am using the ipython
+# notebook cgenff2ff) ==> see output.rtp
+# I include this file in the rtp file used by pdb2gmx:
+# /usr/local/GROMACS/4.6.5/share/gromacs/top/charmm36_mod_pt2.ff/merged.rtp
+#
+
+#
+# In this file:
+# /usr/local/GROMACS/4.6.5/share/gromacs/top/charmm36_mod_pt2.ff/merged.hdb
+# I add the hydrogen so pdb2gmx could add the hydrogens.
+#
+
+

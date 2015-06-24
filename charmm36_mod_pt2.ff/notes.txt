@@ -1,0 +1,90 @@
+# This directory is a copy of this one : charmm36-mar2014.ff
+
+# Name of the residue: PT2 for phosphotyrosine 2- (at first I adopted the
+# Swiss notation (PTR2) but the visualisation with VMD is problematic with
+# this notation). (And the notation TP2 in the Charmm article already exists)
+# For the other names, I adopted the Swiss parameter notation for the phospate part
+# OH/OCC, P/PO4, and O1P,O2P,O3P/OC (because the PT2 part in merged.rtp is a
+# copy of the Swiss parameter (residue PTR2 in the Swiss notation))
+# For the rest of the tyrosine parameters, we use the Charmm/Gromacs notation
+# For example, the merged.rtp parameters are a copy/paste for the Swiss
+# parameters file (aminoacids.rtp) and I just had to change:
+ - the charges on the atoms (CZ, OH, P, O1P, O2P, O3P) in adequation with ref.
+   JACS, 127, 4641(2005):
+   Here are the 6 changes compare to tyrosine:
+	CZ	CA	-0.2800 16
+	OH	OCC	-0.2800	17
+	P	PO4	1.4400	18
+	O1P	OC	-0.9600	19
+	O2P	OC	-0.9600	20
+	O3P	OC	-0.9600	21
+
+########## WARNING     ###########
+# Previously, I made a mistake. I forgot to change 4 charges:
+    CE1 CA  -0.210
+    CE2 CA  -0.210
+    HE1 CA   0.210
+    HE2 CA   0.210
+########## WARNING END ###########
+
+
+
+ - some atom types of the tyrosine part are changed in the Swiss notation. I
+   changed them back to their charmm/gromacs notation: (see the names for
+   tyrosine in merged.rtp) (ATTENTION: name directly for Charmm are a bit
+   different from the notation in Gromacs (charmm/gromacs))
+   HB -> HB1
+   HA -> HA2
+   HA -> HA2
+
+# In the file ../residuetypes.dat
+# I added the PT2 reference
+
+# .hdb file (hydrogens to be able to be added to your residue):
+# PT2: we use the same data of TYR and just delete the last line which
+# corresponds to the hydrogen on the oxygen atom (now the oxygen is linked to
+# PO3)
+
+# ffbonded.itp
+sections :  bond
+            angle
+            dihedral
+# first parameters in each section correspond to parameters of phophotyrosine
+
+# ffnonbonded.itp
+Just 2 new parameters PO4 and OCC (OC already existsand is equivalenet to the
+ON3 charmm parameter). PO4 and OCC are copy of P and ON2. The parameters are
+transferrable
+
+# atomtypes.atp
+Just 2 new parameters PO4 and OCC (OC already here is equivalenet to the
+ON3 charmm parameter). PO4 and OCC are copy of P and ON2. The parameters are
+transferrable
+
+
+######################
+#                    #
+# Paramters for STLC #
+#                    #
+######################
+See these files:
+- merged.rtp (charges / bonds/ impropers) - the data comes from the file
+  output_pdb.rtp in the directory STLC (see the file notes.txt there)
+- merged.hdb (written manually - H atoms construction for pdb2gmx)
+- atomtypes.atp (new atom type - I don't have to add any new types, all the atoms are already in the database)
+- ffnonbonded.itp (idem) 
+- ffbonded.itp (I add to add some paramters from zzd.prm)
+
+One problem with this is that the CGenFF/Vitaly parameter have determined from a mol2
+file coming form the database ZINC and the atom names are not the same as the
+one in the pdb file.
+So I changed the atom names in the file with those from the PDB + a
+appropriate names for the hydrogen atoms that suits the Gromacs (pdb2gmx)
+rules. (See the STLC directory)
+
+
+
+
+
+
+
